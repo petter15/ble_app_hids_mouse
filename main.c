@@ -1394,7 +1394,7 @@ static void bsp_event_handler(bsp_event_t event)
                         		volume_control_send(0x0);
                         		bsp_board_led_invert(1);
                         	}
-                        	bsp_board_led_invert(2);
+//                        	bsp_board_led_invert(2);
                         	break;
                 	//volume_control_send(0x0);
 
