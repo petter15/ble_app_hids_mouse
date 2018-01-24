@@ -91,7 +91,7 @@
 #endif
 
 
-#define DEVICE_NAME                     "Piece_of_shit"                              /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                     "nRF_media_ctrl"                              /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME               "NordicSemiconductor"                       /**< Manufacturer. Will be passed to Device Information Service. */
 
 #define BATTERY_LEVEL_MEAS_INTERVAL     APP_TIMER_TICKS(2000)                        /**< Battery level measurement interval (ticks). */
