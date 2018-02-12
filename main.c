@@ -85,6 +85,8 @@
 #define NRF_LOG_MODULE_NAME "APP"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
+//To disable nRF logging, for example for power optimization purposes, enter sdk_config.h and change nrf_log_default_level to 0
+
 
 #if BUTTONS_NUMBER < 4
 #error "Not enough resources on board to run example"
@@ -159,6 +161,9 @@
 #define APP_ADV_SLOW_INTERVAL           0x0C80                                      /**< Slow advertising interval (in units of 0.625 ms. This value corrsponds to 2 seconds). */
 #define APP_ADV_FAST_TIMEOUT            30                                          /**< The duration of the fast advertising period (in seconds). */
 #define APP_ADV_SLOW_TIMEOUT            180                                         /**< The duration of the slow advertising period (in seconds). */
+
+
+
 
 
 static ble_hids_t     m_hids;                                                       /**< Structure used to identify the HID service. */
@@ -1366,7 +1371,7 @@ static void bsp_event_handler(bsp_event_t event)
             if (m_conn_handle != BLE_CONN_HANDLE_INVALID)
             {
                 //mouse_movement_send(0, -MOVEMENT_SPEED);
-            	volume_control_send(0x10);
+            	volume_control_send(0x20);
             }
             break;
 
@@ -1383,7 +1388,7 @@ static void bsp_event_handler(bsp_event_t event)
             {
 
             	//mouse_movement_send(0, MOVEMENT_SPEED);
-            	volume_control_send(0x20);
+            	volume_control_send(0x10);
 
             }
             break;
@@ -1396,7 +1401,7 @@ static void bsp_event_handler(bsp_event_t event)
                         	}
                         	bsp_board_led_invert(2);
                         	break;
-                	//volume_control_send(0x0);
+
 
         case BSP_EVENT_KEY_1_RELEASE:
                 	if(m_conn_handle != BLE_CONN_HANDLE_INVALID)
@@ -1441,9 +1446,10 @@ static void buttons_leds_init(bool * p_erase_bonds)
     err_code = bsp_init(BSP_INIT_LED | BSP_INIT_BUTTONS, bsp_event_handler);
 
     //Set BSP release events
-   err_code =  bsp_event_to_button_action_assign(0, BSP_BUTTON_ACTION_RELEASE, BSP_EVENT_KEY_0_RELEASE);
-   APP_ERROR_CHECK(err_code);
+    //Switch 0 doesnt send release event because switch 0 is already configured with another event for button release, defined in advertising_buttons_configure in bps_btn_ble.c
+    //Use another pin to maintain full 4-switch functionality
 
+    bsp_event_to_button_action_assign(0, BSP_BUTTON_ACTION_RELEASE, BSP_EVENT_KEY_0_RELEASE);
     bsp_event_to_button_action_assign(1, BSP_BUTTON_ACTION_RELEASE, BSP_EVENT_KEY_1_RELEASE);
     bsp_event_to_button_action_assign(2, BSP_BUTTON_ACTION_RELEASE, BSP_EVENT_KEY_2_RELEASE);
     bsp_event_to_button_action_assign(3, BSP_BUTTON_ACTION_RELEASE, BSP_EVENT_KEY_3_RELEASE);
@@ -1452,6 +1458,8 @@ static void buttons_leds_init(bool * p_erase_bonds)
 
     err_code = bsp_btn_ble_init(NULL, &startup_event);
     APP_ERROR_CHECK(err_code);
+
+
 
     *p_erase_bonds = (startup_event == BSP_EVENT_CLEAR_BONDING_DATA);
 }
@@ -1482,7 +1490,7 @@ int main(void)
     bool erase_bonds;
 
     // Initialize.
-    log_init();
+    log_init();  //Deactivated by now for power optimization purposes
     timers_init();
     buttons_leds_init(&erase_bonds);
     ble_stack_init();
