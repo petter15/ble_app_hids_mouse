@@ -3779,7 +3779,7 @@
 // <4=> Debug 
 
 #ifndef NRF_LOG_DEFAULT_LEVEL
-#define NRF_LOG_DEFAULT_LEVEL 0
+#define NRF_LOG_DEFAULT_LEVEL 3		//nRF log level is 3 by default, when no power optimization is done
 #endif
 
 // <e> NRF_LOG_DEFERRED - Enable deffered logger.
