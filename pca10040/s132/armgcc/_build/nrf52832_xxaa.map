@@ -14412,7 +14412,7 @@ OUTPUT(_build/nrf52832_xxaa.out elf32-littlearm)
  .debug_frame   0x00013480       0x5c c:/gnu_tools_arm_embedded/6_2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
  .debug_frame   0x000134dc       0x20 c:/gnu_tools_arm_embedded/6_2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libnosys.a(sbrk.o)
 
-.debug_info     0x00000000    0x8a5b9
+.debug_info     0x00000000    0x8a5ba
  .debug_info    0x00000000     0x2362 _build/nrf52832_xxaa_nrf_log_backend_serial.c.o
  .debug_info    0x00002362     0x20f7 _build/nrf52832_xxaa_nrf_log_frontend.c.o
  .debug_info    0x00004459      0xcef _build/nrf52832_xxaa_app_button.c.o
@@ -14432,30 +14432,30 @@ OUTPUT(_build/nrf52832_xxaa.out elf32-littlearm)
  .debug_info    0x0001d33b     0x3a25 _build/nrf52832_xxaa_nrf_drv_uart.c.o
  .debug_info    0x00020d60     0x11c2 _build/nrf52832_xxaa_bsp.c.o
  .debug_info    0x00021f22     0x3f05 _build/nrf52832_xxaa_bsp_btn_ble.c.o
- .debug_info    0x00025e27     0x6f2c _build/nrf52832_xxaa_main.c.o
- .debug_info    0x0002cd53     0x3772 _build/nrf52832_xxaa_ble_advdata.c.o
- .debug_info    0x000304c5     0x51d5 _build/nrf52832_xxaa_ble_advertising.c.o
- .debug_info    0x0003569a     0x41db _build/nrf52832_xxaa_ble_conn_params.c.o
- .debug_info    0x00039875     0x4300 _build/nrf52832_xxaa_ble_conn_state.c.o
- .debug_info    0x0003db75     0x33af _build/nrf52832_xxaa_ble_srv_common.c.o
- .debug_info    0x00040f24     0x5378 _build/nrf52832_xxaa_gatt_cache_manager.c.o
- .debug_info    0x0004629c     0x4324 _build/nrf52832_xxaa_gatts_cache_manager.c.o
- .debug_info    0x0004a5c0     0x595c _build/nrf52832_xxaa_id_manager.c.o
- .debug_info    0x0004ff1c     0x4448 _build/nrf52832_xxaa_nrf_ble_gatt.c.o
- .debug_info    0x00054364     0x48c0 _build/nrf52832_xxaa_peer_data_storage.c.o
- .debug_info    0x00058c24     0x4840 _build/nrf52832_xxaa_peer_database.c.o
- .debug_info    0x0005d464     0x3c50 _build/nrf52832_xxaa_peer_id.c.o
- .debug_info    0x000610b4     0x60ed _build/nrf52832_xxaa_peer_manager.c.o
- .debug_info    0x000671a1      0xab6 _build/nrf52832_xxaa_pm_buffer.c.o
- .debug_info    0x00067c57     0x1637 _build/nrf52832_xxaa_pm_mutex.c.o
- .debug_info    0x0006928e     0x5962 _build/nrf52832_xxaa_security_dispatcher.c.o
- .debug_info    0x0006ebf0     0x5472 _build/nrf52832_xxaa_security_manager.c.o
- .debug_info    0x00074062      0xda5 _build/nrf52832_xxaa_system_nrf52.c.o
- .debug_info    0x00074e07     0x4191 _build/nrf52832_xxaa_ble_bas.c.o
- .debug_info    0x00078f98     0x3362 _build/nrf52832_xxaa_ble_dis.c.o
- .debug_info    0x0007c2fa     0x518c _build/nrf52832_xxaa_ble_hids.c.o
- .debug_info    0x00081486     0x564b _build/nrf52832_xxaa_softdevice_handler.c.o
- .debug_info    0x00086ad1     0x3ae8 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
+ .debug_info    0x00025e27     0x6f2d _build/nrf52832_xxaa_main.c.o
+ .debug_info    0x0002cd54     0x3772 _build/nrf52832_xxaa_ble_advdata.c.o
+ .debug_info    0x000304c6     0x51d5 _build/nrf52832_xxaa_ble_advertising.c.o
+ .debug_info    0x0003569b     0x41db _build/nrf52832_xxaa_ble_conn_params.c.o
+ .debug_info    0x00039876     0x4300 _build/nrf52832_xxaa_ble_conn_state.c.o
+ .debug_info    0x0003db76     0x33af _build/nrf52832_xxaa_ble_srv_common.c.o
+ .debug_info    0x00040f25     0x5378 _build/nrf52832_xxaa_gatt_cache_manager.c.o
+ .debug_info    0x0004629d     0x4324 _build/nrf52832_xxaa_gatts_cache_manager.c.o
+ .debug_info    0x0004a5c1     0x595c _build/nrf52832_xxaa_id_manager.c.o
+ .debug_info    0x0004ff1d     0x4448 _build/nrf52832_xxaa_nrf_ble_gatt.c.o
+ .debug_info    0x00054365     0x48c0 _build/nrf52832_xxaa_peer_data_storage.c.o
+ .debug_info    0x00058c25     0x4840 _build/nrf52832_xxaa_peer_database.c.o
+ .debug_info    0x0005d465     0x3c50 _build/nrf52832_xxaa_peer_id.c.o
+ .debug_info    0x000610b5     0x60ed _build/nrf52832_xxaa_peer_manager.c.o
+ .debug_info    0x000671a2      0xab6 _build/nrf52832_xxaa_pm_buffer.c.o
+ .debug_info    0x00067c58     0x1637 _build/nrf52832_xxaa_pm_mutex.c.o
+ .debug_info    0x0006928f     0x5962 _build/nrf52832_xxaa_security_dispatcher.c.o
+ .debug_info    0x0006ebf1     0x5472 _build/nrf52832_xxaa_security_manager.c.o
+ .debug_info    0x00074063      0xda5 _build/nrf52832_xxaa_system_nrf52.c.o
+ .debug_info    0x00074e08     0x4191 _build/nrf52832_xxaa_ble_bas.c.o
+ .debug_info    0x00078f99     0x3362 _build/nrf52832_xxaa_ble_dis.c.o
+ .debug_info    0x0007c2fb     0x518c _build/nrf52832_xxaa_ble_hids.c.o
+ .debug_info    0x00081487     0x564b _build/nrf52832_xxaa_softdevice_handler.c.o
+ .debug_info    0x00086ad2     0x3ae8 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
 
 .debug_abbrev   0x00000000     0x8ce1
  .debug_abbrev  0x00000000      0x399 _build/nrf52832_xxaa_nrf_log_backend_serial.c.o
@@ -14635,7 +14635,7 @@ OUTPUT(_build/nrf52832_xxaa.out elf32-littlearm)
  .debug_ranges  0x00006c68      0x4c8 _build/nrf52832_xxaa_softdevice_handler.c.o
  .debug_ranges  0x00007130      0x3c0 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
 
-.debug_macro    0x00000000    0x1d03f
+.debug_macro    0x00000000    0x1d044
  .debug_macro   0x00000000      0x360 _build/nrf52832_xxaa_nrf_log_backend_serial.c.o
  .debug_macro   0x00000360      0x916 _build/nrf52832_xxaa_nrf_log_backend_serial.c.o
  .debug_macro   0x00000c76       0x22 _build/nrf52832_xxaa_nrf_log_backend_serial.c.o
@@ -14766,62 +14766,62 @@ OUTPUT(_build/nrf52832_xxaa.out elf32-littlearm)
  .debug_macro   0x000171c5      0x464 _build/nrf52832_xxaa_bsp_btn_ble.c.o
  .debug_macro   0x00017629       0x34 _build/nrf52832_xxaa_bsp_btn_ble.c.o
  .debug_macro   0x0001765d       0x1c _build/nrf52832_xxaa_bsp_btn_ble.c.o
- .debug_macro   0x00017679      0x683 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x00017cfc       0xa6 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x00017da2      0x2e9 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x0001808b       0x6a _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x000180f5       0x3a _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x0001812f       0x16 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x00018145       0x22 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x00018167       0x16 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x0001817d       0x2e _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x000181ab       0x82 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x0001822d       0x3a _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x00018267       0x16 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x0001827d       0x37 _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x000182b4       0x1c _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x000182d0       0x1c _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x000182ec       0x1c _build/nrf52832_xxaa_main.c.o
- .debug_macro   0x00018308      0x2a3 _build/nrf52832_xxaa_ble_advdata.c.o
- .debug_macro   0x000185ab       0x64 _build/nrf52832_xxaa_ble_advdata.c.o
- .debug_macro   0x0001860f      0x2f1 _build/nrf52832_xxaa_ble_advertising.c.o
- .debug_macro   0x00018900       0x46 _build/nrf52832_xxaa_ble_advertising.c.o
- .debug_macro   0x00018946      0x313 _build/nrf52832_xxaa_ble_conn_params.c.o
- .debug_macro   0x00018c59      0x10e _build/nrf52832_xxaa_ble_conn_params.c.o
- .debug_macro   0x00018d67       0x86 _build/nrf52832_xxaa_ble_conn_params.c.o
- .debug_macro   0x00018ded      0x2ef _build/nrf52832_xxaa_ble_conn_state.c.o
- .debug_macro   0x000190dc      0x2dd _build/nrf52832_xxaa_ble_srv_common.c.o
- .debug_macro   0x000193b9      0x3a5 _build/nrf52832_xxaa_gatt_cache_manager.c.o
- .debug_macro   0x0001975e       0x40 _build/nrf52832_xxaa_gatt_cache_manager.c.o
- .debug_macro   0x0001979e      0x393 _build/nrf52832_xxaa_gatts_cache_manager.c.o
- .debug_macro   0x00019b31       0x10 _build/nrf52832_xxaa_gatts_cache_manager.c.o
- .debug_macro   0x00019b41      0x3b8 _build/nrf52832_xxaa_id_manager.c.o
- .debug_macro   0x00019ef9       0x40 _build/nrf52832_xxaa_id_manager.c.o
- .debug_macro   0x00019f39      0x349 _build/nrf52832_xxaa_nrf_ble_gatt.c.o
- .debug_macro   0x0001a282       0x16 _build/nrf52832_xxaa_nrf_ble_gatt.c.o
- .debug_macro   0x0001a298      0x392 _build/nrf52832_xxaa_peer_data_storage.c.o
- .debug_macro   0x0001a62a       0x3a _build/nrf52832_xxaa_peer_data_storage.c.o
- .debug_macro   0x0001a664      0x3ad _build/nrf52832_xxaa_peer_database.c.o
- .debug_macro   0x0001aa11       0x10 _build/nrf52832_xxaa_peer_database.c.o
- .debug_macro   0x0001aa21       0x10 _build/nrf52832_xxaa_peer_database.c.o
- .debug_macro   0x0001aa31      0x368 _build/nrf52832_xxaa_peer_id.c.o
- .debug_macro   0x0001ad99      0x3de _build/nrf52832_xxaa_peer_manager.c.o
- .debug_macro   0x0001b177      0x214 _build/nrf52832_xxaa_pm_buffer.c.o
- .debug_macro   0x0001b38b      0x2c4 _build/nrf52832_xxaa_pm_mutex.c.o
- .debug_macro   0x0001b64f      0x3a1 _build/nrf52832_xxaa_security_dispatcher.c.o
- .debug_macro   0x0001b9f0      0x3ab _build/nrf52832_xxaa_security_manager.c.o
- .debug_macro   0x0001bd9b       0xf5 _build/nrf52832_xxaa_system_nrf52.c.o
- .debug_macro   0x0001be90      0x292 _build/nrf52832_xxaa_ble_bas.c.o
- .debug_macro   0x0001c122      0x343 _build/nrf52832_xxaa_ble_dis.c.o
- .debug_macro   0x0001c465       0x10 _build/nrf52832_xxaa_ble_dis.c.o
- .debug_macro   0x0001c475      0x34a _build/nrf52832_xxaa_ble_hids.c.o
- .debug_macro   0x0001c7bf       0x34 _build/nrf52832_xxaa_ble_hids.c.o
- .debug_macro   0x0001c7f3      0x3ed _build/nrf52832_xxaa_softdevice_handler.c.o
- .debug_macro   0x0001cbe0       0x52 _build/nrf52832_xxaa_softdevice_handler.c.o
- .debug_macro   0x0001cc32       0x55 _build/nrf52832_xxaa_softdevice_handler.c.o
- .debug_macro   0x0001cc87       0x57 _build/nrf52832_xxaa_softdevice_handler.c.o
- .debug_macro   0x0001ccde       0x10 _build/nrf52832_xxaa_softdevice_handler.c.o
- .debug_macro   0x0001ccee      0x351 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
+ .debug_macro   0x00017679      0x688 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x00017d01       0xa6 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x00017da7      0x2e9 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x00018090       0x6a _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x000180fa       0x3a _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x00018134       0x16 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x0001814a       0x22 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x0001816c       0x16 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x00018182       0x2e _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x000181b0       0x82 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x00018232       0x3a _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x0001826c       0x16 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x00018282       0x37 _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x000182b9       0x1c _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x000182d5       0x1c _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x000182f1       0x1c _build/nrf52832_xxaa_main.c.o
+ .debug_macro   0x0001830d      0x2a3 _build/nrf52832_xxaa_ble_advdata.c.o
+ .debug_macro   0x000185b0       0x64 _build/nrf52832_xxaa_ble_advdata.c.o
+ .debug_macro   0x00018614      0x2f1 _build/nrf52832_xxaa_ble_advertising.c.o
+ .debug_macro   0x00018905       0x46 _build/nrf52832_xxaa_ble_advertising.c.o
+ .debug_macro   0x0001894b      0x313 _build/nrf52832_xxaa_ble_conn_params.c.o
+ .debug_macro   0x00018c5e      0x10e _build/nrf52832_xxaa_ble_conn_params.c.o
+ .debug_macro   0x00018d6c       0x86 _build/nrf52832_xxaa_ble_conn_params.c.o
+ .debug_macro   0x00018df2      0x2ef _build/nrf52832_xxaa_ble_conn_state.c.o
+ .debug_macro   0x000190e1      0x2dd _build/nrf52832_xxaa_ble_srv_common.c.o
+ .debug_macro   0x000193be      0x3a5 _build/nrf52832_xxaa_gatt_cache_manager.c.o
+ .debug_macro   0x00019763       0x40 _build/nrf52832_xxaa_gatt_cache_manager.c.o
+ .debug_macro   0x000197a3      0x393 _build/nrf52832_xxaa_gatts_cache_manager.c.o
+ .debug_macro   0x00019b36       0x10 _build/nrf52832_xxaa_gatts_cache_manager.c.o
+ .debug_macro   0x00019b46      0x3b8 _build/nrf52832_xxaa_id_manager.c.o
+ .debug_macro   0x00019efe       0x40 _build/nrf52832_xxaa_id_manager.c.o
+ .debug_macro   0x00019f3e      0x349 _build/nrf52832_xxaa_nrf_ble_gatt.c.o
+ .debug_macro   0x0001a287       0x16 _build/nrf52832_xxaa_nrf_ble_gatt.c.o
+ .debug_macro   0x0001a29d      0x392 _build/nrf52832_xxaa_peer_data_storage.c.o
+ .debug_macro   0x0001a62f       0x3a _build/nrf52832_xxaa_peer_data_storage.c.o
+ .debug_macro   0x0001a669      0x3ad _build/nrf52832_xxaa_peer_database.c.o
+ .debug_macro   0x0001aa16       0x10 _build/nrf52832_xxaa_peer_database.c.o
+ .debug_macro   0x0001aa26       0x10 _build/nrf52832_xxaa_peer_database.c.o
+ .debug_macro   0x0001aa36      0x368 _build/nrf52832_xxaa_peer_id.c.o
+ .debug_macro   0x0001ad9e      0x3de _build/nrf52832_xxaa_peer_manager.c.o
+ .debug_macro   0x0001b17c      0x214 _build/nrf52832_xxaa_pm_buffer.c.o
+ .debug_macro   0x0001b390      0x2c4 _build/nrf52832_xxaa_pm_mutex.c.o
+ .debug_macro   0x0001b654      0x3a1 _build/nrf52832_xxaa_security_dispatcher.c.o
+ .debug_macro   0x0001b9f5      0x3ab _build/nrf52832_xxaa_security_manager.c.o
+ .debug_macro   0x0001bda0       0xf5 _build/nrf52832_xxaa_system_nrf52.c.o
+ .debug_macro   0x0001be95      0x292 _build/nrf52832_xxaa_ble_bas.c.o
+ .debug_macro   0x0001c127      0x343 _build/nrf52832_xxaa_ble_dis.c.o
+ .debug_macro   0x0001c46a       0x10 _build/nrf52832_xxaa_ble_dis.c.o
+ .debug_macro   0x0001c47a      0x34a _build/nrf52832_xxaa_ble_hids.c.o
+ .debug_macro   0x0001c7c4       0x34 _build/nrf52832_xxaa_ble_hids.c.o
+ .debug_macro   0x0001c7f8      0x3ed _build/nrf52832_xxaa_softdevice_handler.c.o
+ .debug_macro   0x0001cbe5       0x52 _build/nrf52832_xxaa_softdevice_handler.c.o
+ .debug_macro   0x0001cc37       0x55 _build/nrf52832_xxaa_softdevice_handler.c.o
+ .debug_macro   0x0001cc8c       0x57 _build/nrf52832_xxaa_softdevice_handler.c.o
+ .debug_macro   0x0001cce3       0x10 _build/nrf52832_xxaa_softdevice_handler.c.o
+ .debug_macro   0x0001ccf3      0x351 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
 
 .debug_line     0x00000000    0x24dad
  .debug_line    0x00000000      0xbc9 _build/nrf52832_xxaa_nrf_log_backend_serial.c.o
@@ -14868,7 +14868,7 @@ OUTPUT(_build/nrf52832_xxaa.out elf32-littlearm)
  .debug_line    0x00022ae7     0x1391 _build/nrf52832_xxaa_softdevice_handler.c.o
  .debug_line    0x00023e78      0xf35 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
 
-.debug_str      0x00000000    0x82fc8
+.debug_str      0x00000000    0x82fe5
  .debug_str     0x00000000    0x676e0 _build/nrf52832_xxaa_nrf_log_backend_serial.c.o
                               0x683f6 (size before relaxing)
  .debug_str     0x000676e0     0x1c9f _build/nrf52832_xxaa_nrf_log_frontend.c.o
@@ -14907,51 +14907,51 @@ OUTPUT(_build/nrf52832_xxaa.out elf32-littlearm)
                               0x67887 (size before relaxing)
  .debug_str     0x0007893f      0xf56 _build/nrf52832_xxaa_bsp_btn_ble.c.o
                               0x69889 (size before relaxing)
- .debug_str     0x00079895     0x43e0 _build/nrf52832_xxaa_main.c.o
-                              0x765e0 (size before relaxing)
- .debug_str     0x0007dc75      0x2c2 _build/nrf52832_xxaa_ble_advdata.c.o
+ .debug_str     0x00079895     0x43fd _build/nrf52832_xxaa_main.c.o
+                              0x765fd (size before relaxing)
+ .debug_str     0x0007dc92      0x2c2 _build/nrf52832_xxaa_ble_advdata.c.o
                               0x6c1ab (size before relaxing)
- .debug_str     0x0007df37      0x420 _build/nrf52832_xxaa_ble_advertising.c.o
+ .debug_str     0x0007df54      0x420 _build/nrf52832_xxaa_ble_advertising.c.o
                               0x6eb99 (size before relaxing)
- .debug_str     0x0007e357      0x1c6 _build/nrf52832_xxaa_ble_conn_params.c.o
+ .debug_str     0x0007e374      0x1c6 _build/nrf52832_xxaa_ble_conn_params.c.o
                               0x6d5a9 (size before relaxing)
- .debug_str     0x0007e51d      0x70e _build/nrf52832_xxaa_ble_conn_state.c.o
+ .debug_str     0x0007e53a      0x70e _build/nrf52832_xxaa_ble_conn_state.c.o
                               0x6c174 (size before relaxing)
- .debug_str     0x0007ec2b      0x27c _build/nrf52832_xxaa_ble_srv_common.c.o
+ .debug_str     0x0007ec48      0x27c _build/nrf52832_xxaa_ble_srv_common.c.o
                               0x6c20b (size before relaxing)
- .debug_str     0x0007eea7      0x993 _build/nrf52832_xxaa_gatt_cache_manager.c.o
+ .debug_str     0x0007eec4      0x993 _build/nrf52832_xxaa_gatt_cache_manager.c.o
                               0x6e9b4 (size before relaxing)
- .debug_str     0x0007f83a      0x51f _build/nrf52832_xxaa_gatts_cache_manager.c.o
+ .debug_str     0x0007f857      0x51f _build/nrf52832_xxaa_gatts_cache_manager.c.o
                               0x6d981 (size before relaxing)
- .debug_str     0x0007fd59      0x62f _build/nrf52832_xxaa_id_manager.c.o
+ .debug_str     0x0007fd76      0x62f _build/nrf52832_xxaa_id_manager.c.o
                               0x6ebec (size before relaxing)
- .debug_str     0x00080388      0x21b _build/nrf52832_xxaa_nrf_ble_gatt.c.o
+ .debug_str     0x000803a5      0x21b _build/nrf52832_xxaa_nrf_ble_gatt.c.o
                               0x6eade (size before relaxing)
- .debug_str     0x000805a3      0x538 _build/nrf52832_xxaa_peer_data_storage.c.o
+ .debug_str     0x000805c0      0x538 _build/nrf52832_xxaa_peer_data_storage.c.o
                               0x6de79 (size before relaxing)
- .debug_str     0x00080adb      0x68f _build/nrf52832_xxaa_peer_database.c.o
+ .debug_str     0x00080af8      0x68f _build/nrf52832_xxaa_peer_database.c.o
                               0x6df9d (size before relaxing)
- .debug_str     0x0008116a      0x11f _build/nrf52832_xxaa_peer_id.c.o
+ .debug_str     0x00081187      0x11f _build/nrf52832_xxaa_peer_id.c.o
                               0x6d03a (size before relaxing)
- .debug_str     0x00081289      0x692 _build/nrf52832_xxaa_peer_manager.c.o
+ .debug_str     0x000812a6      0x692 _build/nrf52832_xxaa_peer_manager.c.o
                               0x6f5fb (size before relaxing)
- .debug_str     0x0008191b      0x13a _build/nrf52832_xxaa_pm_buffer.c.o
+ .debug_str     0x00081938      0x13a _build/nrf52832_xxaa_pm_buffer.c.o
                               0x64a21 (size before relaxing)
- .debug_str     0x00081a55       0xd3 _build/nrf52832_xxaa_pm_mutex.c.o
+ .debug_str     0x00081a72       0xd3 _build/nrf52832_xxaa_pm_mutex.c.o
                               0x66897 (size before relaxing)
- .debug_str     0x00081b28      0x33e _build/nrf52832_xxaa_security_dispatcher.c.o
+ .debug_str     0x00081b45      0x33e _build/nrf52832_xxaa_security_dispatcher.c.o
                               0x6ebf3 (size before relaxing)
- .debug_str     0x00081e66      0x330 _build/nrf52832_xxaa_security_manager.c.o
+ .debug_str     0x00081e83      0x330 _build/nrf52832_xxaa_security_manager.c.o
                               0x6ea53 (size before relaxing)
- .debug_str     0x00082196      0x16c _build/nrf52832_xxaa_system_nrf52.c.o
+ .debug_str     0x000821b3      0x16c _build/nrf52832_xxaa_system_nrf52.c.o
                               0x5bba8 (size before relaxing)
- .debug_str     0x00082302       0xfd _build/nrf52832_xxaa_ble_bas.c.o
+ .debug_str     0x0008231f       0xfd _build/nrf52832_xxaa_ble_bas.c.o
                               0x6c842 (size before relaxing)
- .debug_str     0x000823ff      0x173 _build/nrf52832_xxaa_ble_dis.c.o
+ .debug_str     0x0008241c      0x173 _build/nrf52832_xxaa_ble_dis.c.o
                               0x6c669 (size before relaxing)
- .debug_str     0x00082572      0x5a6 _build/nrf52832_xxaa_ble_hids.c.o
+ .debug_str     0x0008258f      0x5a6 _build/nrf52832_xxaa_ble_hids.c.o
                               0x6dbcc (size before relaxing)
- .debug_str     0x00082b18      0x428 _build/nrf52832_xxaa_softdevice_handler.c.o
+ .debug_str     0x00082b35      0x428 _build/nrf52832_xxaa_softdevice_handler.c.o
                               0x6fc11 (size before relaxing)
- .debug_str     0x00082f40       0x88 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
+ .debug_str     0x00082f5d       0x88 _build/nrf52832_xxaa_softdevice_handler_appsh.c.o
                               0x6cd97 (size before relaxing)

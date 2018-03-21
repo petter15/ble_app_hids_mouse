@@ -109,15 +109,23 @@
 /*lint -emacro(524, MIN_CONN_INTERVAL) // Loss of precision */
 //Original connection intervals - Keep for reference.
 //#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
-//#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(70, UNIT_1_25_MS)             /**< Maximum connection interval (15 ms). */
+//#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(15, UNIT_1_25_MS)             /**< Maximum connection interval (15 ms). */
 //#define SLAVE_LATENCY                   20                                          /**< Slave latency. (20 ) */
 //#define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(32000, UNIT_10_MS)             /**< Connection supervisory timeout (3000 ms). */
 
-//Manipulated connection intervals
+////Manipulated connection intervals
+//#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
+//#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(70, UNIT_1_25_MS)             /**< Maximum connection interval (70 ms). */
+//#define SLAVE_LATENCY                   57                                          /**< Slave latency. (57 ) */
+//#define CONN_SUP_TIMEOUT               	MSEC_TO_UNITS(32000, UNIT_10_MS)             /**< Connection supervisory timeout (32000 ms). */
+
+//Second manipulation
 #define MIN_CONN_INTERVAL               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
-#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(70, UNIT_1_25_MS)             /**< Maximum connection interval (15 ms). */
-#define SLAVE_LATENCY                   57                                          /**< Slave latency. (20 ) */
-#define CONN_SUP_TIMEOUT               	1000	// MSEC_TO_UNITS(32000, UNIT_10_MS)             /**< Connection supervisory timeout (3000 ms). */
+#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(125, UNIT_1_25_MS)             /**< Maximum connection interval (15 ms). */
+#define SLAVE_LATENCY                   30                                         /**< Slave latency. (20 ) */
+#define CONN_SUP_TIMEOUT               	MSEC_TO_UNITS(20000, UNIT_10_MS)             /**< Connection supervisory timeout (3000 ms). */
+
+
 
 #define FIRST_CONN_PARAMS_UPDATE_DELAY  APP_TIMER_TICKS(5000)                       /**< Time from initiating event (connect or start of notification) to first time sd_ble_gap_conn_param_update is called (5 seconds). */
 #define NEXT_CONN_PARAMS_UPDATE_DELAY   APP_TIMER_TICKS(30000)                      /**< Time between each call to sd_ble_gap_conn_param_update after the first call (30 seconds). */
@@ -518,9 +526,9 @@ static void gap_params_init(void)
     APP_ERROR_CHECK(err_code);
 
     //Set radio transmission power (standard 0 dBm)
-    //Transmission levels: -40, -30, -20, -16, -12, -8, -4, 0, 3, and 4 dBm
+    //Transmission levels for nRF52: -40, -20, -16, -12, -8, -4, 0, 3, and 4 dBm
 
-    err_code = sd_ble_gap_tx_power_set(-40);
+    err_code = sd_ble_gap_tx_power_set(-20);
     APP_ERROR_CHECK(err_code);
 }
 
@@ -1439,8 +1447,9 @@ static void bsp_event_handler(bsp_event_t event)
                         		volume_control_send(0x0);
 
                         	}
-
                         	break;
+
+
         default:
             break;
     }
