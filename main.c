@@ -97,6 +97,7 @@
 #define MANUFACTURER_NAME               "NordicSemiconductor"                       /**< Manufacturer. Will be passed to Device Information Service. */
 
 #define BATTERY_LEVEL_MEAS_INTERVAL     APP_TIMER_TICKS(2000)                        /**< Battery level measurement interval (ticks). */
+#define RECONNECT_PARAM_NEGO_INTERVAL	APP_TIMER_TICKS(60000)							/**< Interval between reconnection and firing of connection interval negotiation (ticks). */
 #define MIN_BATTERY_LEVEL               81                                          /**< Minimum simulated battery level. */
 #define MAX_BATTERY_LEVEL               100                                         /**< Maximum simulated battery level. */
 #define BATTERY_LEVEL_INCREMENT         1                                           /**< Increment between each simulated battery level measurement. */
@@ -107,21 +108,21 @@
 #define PNP_ID_PRODUCT_VERSION          0x0001                                      /**< Product Version. */
 
 /*lint -emacro(524, MIN_CONN_INTERVAL) // Loss of precision */
-//Original connection intervals - Keep for reference.
+////Original connection intervals - Keep for reference.
 //#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
 //#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(15, UNIT_1_25_MS)             /**< Maximum connection interval (15 ms). */
 //#define SLAVE_LATENCY                   20                                          /**< Slave latency. (20 ) */
-//#define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(32000, UNIT_10_MS)             /**< Connection supervisory timeout (3000 ms). */
+//#define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(3000, UNIT_10_MS)             /**< Connection supervisory timeout (3000 ms). */
 
 ////Manipulated connection intervals
-//#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
-//#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(70, UNIT_1_25_MS)             /**< Maximum connection interval (70 ms). */
-//#define SLAVE_LATENCY                   57                                          /**< Slave latency. (57 ) */
-//#define CONN_SUP_TIMEOUT               	MSEC_TO_UNITS(32000, UNIT_10_MS)             /**< Connection supervisory timeout (32000 ms). */
+//#define MIN_CONN_INTERVAL2               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
+//#define MAX_CONN_INTERVAL2               MSEC_TO_UNITS(125, UNIT_1_25_MS)             /**< Maximum connection interval (70 ms). */
+//#define SLAVE_LATENCY2                   30                                          /**< Slave latency. (57 ) */
+//#define CONN_SUP_TIMEOUT2               	MSEC_TO_UNITS(32000, UNIT_10_MS)             /**< Connection supervisory timeout (32000 ms). */
 
-//Second manipulation
+////Second manipulation
 #define MIN_CONN_INTERVAL               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
-#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(125, UNIT_1_25_MS)             /**< Maximum connection interval (15 ms). */
+#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(125, UNIT_1_25_MS)             /**< Maximum connection interval (125 ms). */
 #define SLAVE_LATENCY                   30                                         /**< Slave latency. (20 ) */
 #define CONN_SUP_TIMEOUT               	MSEC_TO_UNITS(20000, UNIT_10_MS)             /**< Connection supervisory timeout (3000 ms). */
 
@@ -191,6 +192,8 @@ static sensorsim_cfg_t   m_battery_sim_cfg;                                     
 static sensorsim_state_t m_battery_sim_state;                                       /**< Battery Level sensor simulator state. */
 
 APP_TIMER_DEF(m_battery_timer_id);                                                  /**< Battery timer. */
+APP_TIMER_DEF(m_reconn_timer_id);													/**< Reconnection timer. */
+
 
 
 static pm_peer_id_t m_peer_id;                                                      /**< Device reference handle to the current bonded central. */
@@ -203,6 +206,7 @@ static bool           m_is_wl_changed;                                          
 
 static void on_hids_evt(ble_hids_t * p_hids, ble_hids_evt_t * p_evt);
 
+static void reconnect_negotiation_handler(void * p_context);
 
 /**@brief Callback function for asserts in the SoftDevice.
  *
@@ -304,11 +308,15 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
 {
     ret_code_t err_code;
 
+
+
     switch (p_evt->evt_id)
     {
         case PM_EVT_BONDED_PEER_CONNECTED:
         {
             NRF_LOG_INFO("Connected to a previously bonded device.\r\n");
+
+
         } break;
 
         case PM_EVT_CONN_SEC_SUCCEEDED:
@@ -490,6 +498,13 @@ static void timers_init(void)
                                 battery_level_meas_timeout_handler);
     APP_ERROR_CHECK(err_code);
 
+    // Create reconnection timer.
+    err_code = app_timer_create(&m_reconn_timer_id,
+    		APP_TIMER_MODE_SINGLE_SHOT,
+			reconnect_negotiation_handler);
+    		//nrf_gpio_pin_toggle(LED_2);
+    APP_ERROR_CHECK(err_code);
+
 
 }
 
@@ -568,29 +583,29 @@ static void dis_init(void)
 }
 
 
-/**@brief Function for initializing Battery Service.
- */
-static void bas_init(void)
-{
-    ret_code_t     err_code;
-    ble_bas_init_t bas_init_obj;
-
-    memset(&bas_init_obj, 0, sizeof(bas_init_obj));
-
-    bas_init_obj.evt_handler          = NULL;
-    bas_init_obj.support_notification = true;
-    bas_init_obj.p_report_ref         = NULL;
-    bas_init_obj.initial_batt_level   = 100;
-
-    BLE_GAP_CONN_SEC_MODE_SET_ENC_NO_MITM(&bas_init_obj.battery_level_char_attr_md.cccd_write_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_ENC_NO_MITM(&bas_init_obj.battery_level_char_attr_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&bas_init_obj.battery_level_char_attr_md.write_perm);
-
-    BLE_GAP_CONN_SEC_MODE_SET_ENC_NO_MITM(&bas_init_obj.battery_level_report_read_perm);
-
-    err_code = ble_bas_init(&m_bas, &bas_init_obj);
-    APP_ERROR_CHECK(err_code);
-}
+///**@brief Function for initializing Battery Service.
+// */
+//static void bas_init(void)
+//{
+//    ret_code_t     err_code;
+//    ble_bas_init_t bas_init_obj;
+//
+//    memset(&bas_init_obj, 0, sizeof(bas_init_obj));
+//
+//    bas_init_obj.evt_handler          = NULL;
+//    bas_init_obj.support_notification = true;
+//    bas_init_obj.p_report_ref         = NULL;
+//    bas_init_obj.initial_batt_level   = 100;
+//
+//    BLE_GAP_CONN_SEC_MODE_SET_ENC_NO_MITM(&bas_init_obj.battery_level_char_attr_md.cccd_write_perm);
+//    BLE_GAP_CONN_SEC_MODE_SET_ENC_NO_MITM(&bas_init_obj.battery_level_char_attr_md.read_perm);
+//    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&bas_init_obj.battery_level_char_attr_md.write_perm);
+//
+//    BLE_GAP_CONN_SEC_MODE_SET_ENC_NO_MITM(&bas_init_obj.battery_level_report_read_perm);
+//
+//    err_code = ble_bas_init(&m_bas, &bas_init_obj);
+//    APP_ERROR_CHECK(err_code);
+//}
 
 
 /**@brief Function for initializing HID Service.
@@ -761,22 +776,22 @@ static void hids_init(void)
 static void services_init(void)
 {
     dis_init();
-    bas_init();
+   // bas_init();
     hids_init();
 }
 
 
-/**@brief Function for initializing the battery sensor simulator.
- */
-static void sensor_simulator_init(void)
-{
-    m_battery_sim_cfg.min          = MIN_BATTERY_LEVEL;
-    m_battery_sim_cfg.max          = MAX_BATTERY_LEVEL;
-    m_battery_sim_cfg.incr         = BATTERY_LEVEL_INCREMENT;
-    m_battery_sim_cfg.start_at_max = true;
-
-    sensorsim_init(&m_battery_sim_state, &m_battery_sim_cfg);
-}
+///**@brief Function for initializing the battery sensor simulator.
+// */
+//static void sensor_simulator_init(void)
+//{
+//    m_battery_sim_cfg.min          = MIN_BATTERY_LEVEL;
+//    m_battery_sim_cfg.max          = MAX_BATTERY_LEVEL;
+//    m_battery_sim_cfg.incr         = BATTERY_LEVEL_INCREMENT;
+//    m_battery_sim_cfg.start_at_max = true;
+//
+//    sensorsim_init(&m_battery_sim_state, &m_battery_sim_cfg);
+//}
 
 
 /**@brief Function for handling a Connection Parameters error.
@@ -812,15 +827,15 @@ static void conn_params_init(void)
 }
 
 
-/**@brief Function for starting timers.
- */
-static void timers_start(void)
-{
-    ret_code_t err_code;
-
-    err_code = app_timer_start(m_battery_timer_id, BATTERY_LEVEL_MEAS_INTERVAL, NULL);
-    APP_ERROR_CHECK(err_code);
-}
+///**@brief Function for starting timers.
+// */
+//static void timers_start(void)
+//{
+//    ret_code_t err_code;
+//
+//    err_code = app_timer_start(m_battery_timer_id, BATTERY_LEVEL_MEAS_INTERVAL, NULL);
+//    APP_ERROR_CHECK(err_code);
+//}
 
 
 /**@brief Function for putting the chip into sleep mode.
@@ -971,6 +986,36 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     }
 }
 
+/**@brief Function for handling connection parameter negotiation upon reconnect.
+ *
+ * @param[in]   p_context Standardized parameter automatically assigned from the counter module.
+ */
+
+static void reconnect_negotiation_handler(void * p_context)
+{
+
+	UNUSED_PARAMETER(p_context);
+
+
+
+	ret_code_t err_code;
+
+	//Connection parameter negotiation upon reconnect
+		if (m_conn_handle != BLE_CONN_HANDLE_INVALID){
+			//nrf_gpio_pin_toggle(LED_2);
+			err_code = sd_ble_gap_conn_param_update(m_conn_handle, NULL);
+			APP_ERROR_CHECK(err_code);
+			}
+		//else
+			//Do nothing
+			//nrf_gpio_pin_toggle(LED_4);
+
+
+
+
+
+}
+
 
 /**@brief Function for handling the Application's BLE Stack events.
  *
@@ -980,6 +1025,8 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
 {
     ret_code_t err_code;
 
+   // static ble_gap_conn_params_t  m_preferred_conn_params;  /**< Connection parameters preferred by the application. */
+
     switch (p_ble_evt->header.evt_id)
     {
         case BLE_GAP_EVT_CONNECTED:
@@ -988,6 +1035,13 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
             APP_ERROR_CHECK(err_code);
 
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+
+            err_code = app_timer_start(m_reconn_timer_id, RECONNECT_PARAM_NEGO_INTERVAL, NULL);
+            //nrf_gpio_pin_toggle(LED_3);
+            APP_ERROR_CHECK(err_code);
+
+
+
             break; // BLE_GAP_EVT_CONNECTED
 
         case BLE_GAP_EVT_DISCONNECTED:
@@ -1351,6 +1405,7 @@ static void scheduler_init(void)
 static void bsp_event_handler(bsp_event_t event)
 {
     ret_code_t err_code;
+//    ble_gap_conn_params_t  m_preferred_conn_params;  /**< Connection parameters preferred by the application. */
 
     switch (event)
     {
@@ -1393,6 +1448,7 @@ static void bsp_event_handler(bsp_event_t event)
             {
                 //mouse_movement_send(0, -MOVEMENT_SPEED);
             	volume_control_send(0x20);
+
             }
             break;
 
@@ -1401,6 +1457,8 @@ static void bsp_event_handler(bsp_event_t event)
             {
                // mouse_movement_send(MOVEMENT_SPEED, 0);
             	volume_control_send(0x01);
+//            	void reconnect_negotiation_handler(void * p_context);
+
             }
             break;
 
@@ -1410,6 +1468,12 @@ static void bsp_event_handler(bsp_event_t event)
 
             	//mouse_movement_send(0, MOVEMENT_SPEED);
             	volume_control_send(0x10);
+
+//            	nrf_gpio_pin_toggle(LED_3);
+//            	err_code = app_timer_start(m_reconn_timer_id, RECONNECT_PARAM_NEGO_INTERVAL, NULL);
+//            	APP_ERROR_CHECK(err_code);
+
+
 
             }
             break;
@@ -1465,7 +1529,7 @@ static void buttons_leds_init(bool * p_erase_bonds)
     ret_code_t err_code;
     bsp_event_t startup_event;
 
-    err_code = bsp_init(BSP_INIT_LED | BSP_INIT_BUTTONS, bsp_event_handler);
+    err_code = bsp_init(/*BSP_INIT_LED |*/ BSP_INIT_BUTTONS, bsp_event_handler);
 
     //Set BSP release events
     //Switch 0 doesnt send release event because switch 0 is already configured with another event for button release, defined in advertising_buttons_configure in bps_btn_ble.c
@@ -1505,6 +1569,27 @@ static void power_manage(void)
 }
 
 
+//static void power_config_init(void)
+//{
+//	ret_code_t err_code;
+//
+//	//Set nrf low power mode, to ensure low power operation
+//	//err_code = sd_power_mode_set(NRF_POWER_MODE_LOWPWR);
+//	//APP_ERROR_CHECK(err_code);
+//
+//	//Enable power of failure warning
+//	err_code = sd_power_pof_enable(1);
+//	APP_ERROR_CHECK(err_code);
+//
+//	//Set power of failure threshold to 1.7 Volts
+//	err_code = sd_power_pof_threshold_set(NRF_POWER_THRESHOLD_V17);
+//	APP_ERROR_CHECK(err_code);
+//
+//
+//
+//}
+//
+
 /**@brief Function for application main entry.
  */
 int main(void)
@@ -1521,13 +1606,15 @@ int main(void)
     gatt_init();
     advertising_init();
     services_init();
-    sensor_simulator_init();
+    //sensor_simulator_init();
     conn_params_init();
     peer_manager_init();
 
+    //power_config_init();
+
     // Start execution.
     NRF_LOG_INFO("HID Mouse example started.\r\n");
-    timers_start();
+    //timers_start();
 
     advertising_start(erase_bonds);
 

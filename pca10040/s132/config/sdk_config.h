@@ -2827,7 +2827,7 @@
 
 #endif //UART0_ENABLED
 // </e>
-
+//Logging for test purpose Pettern
 // <e> UART_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
 #ifndef UART_CONFIG_LOG_ENABLED
@@ -3820,6 +3820,7 @@
 
 #ifndef NRF_LOG_BACKEND_MAX_STRING_LENGTH
 #define NRF_LOG_BACKEND_MAX_STRING_LENGTH 256
+//#define NRF_LOG_BACKEND_MAX_STRING_LENGTH 512
 #endif
 
 // <o> NRF_LOG_TIMESTAMP_DIGITS - Number of digits for timestamp 

@@ -196,7 +196,7 @@ CFLAGS += -DSOFTDEVICE_PRESENT
 CFLAGS += -DSWI_DISABLE0
 CFLAGS += -mcpu=cortex-m4
 CFLAGS += -mthumb -mabi=aapcs
-CFLAGS +=  -Wall -Werror -O0 -g3 #Optimizer level 3, optimizer level -O0 is standard and should be used for debugging
+CFLAGS +=  -Wall -Werror -O3 -g0 #Optimizer level 3, optimizer level -O0 is standard and should be used for debugging
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 # keep every function in separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
