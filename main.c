@@ -107,7 +107,7 @@
 #define PNP_ID_PRODUCT_ID               0xEEEE                                      /**< Product ID. */
 #define PNP_ID_PRODUCT_VERSION          0x0001                                      /**< Product Version. */
 
-/*lint -emacro(524, MIN_CONN_INTERVAL) // Loss of precision */
+///*lint -emacro(524, MIN_CONN_INTERVAL) // Loss of precision */
 ////Original connection intervals - Keep for reference.
 //#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(7.5, UNIT_1_25_MS)            /**< Minimum connection interval (7.5 ms). */
 //#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(15, UNIT_1_25_MS)             /**< Maximum connection interval (15 ms). */
@@ -191,7 +191,7 @@ static uint16_t       m_conn_handle  = BLE_CONN_HANDLE_INVALID;                 
 static sensorsim_cfg_t   m_battery_sim_cfg;                                         /**< Battery Level sensor simulator configuration. */
 static sensorsim_state_t m_battery_sim_state;                                       /**< Battery Level sensor simulator state. */
 
-APP_TIMER_DEF(m_battery_timer_id);                                                  /**< Battery timer. */
+//APP_TIMER_DEF(m_battery_timer_id);                                                  /**< Battery timer. */
 APP_TIMER_DEF(m_reconn_timer_id);													/**< Reconnection timer. */
 
 
@@ -446,25 +446,25 @@ static void ble_advertising_error_handler(uint32_t nrf_error)
 }
 
 
-/**@brief Function for performing a battery measurement, and update the Battery Level characteristic in the Battery Service.
- */
-static void battery_level_update(void)
-{
-    ret_code_t err_code;
-    uint8_t  battery_level;
-
-    battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
-
-    err_code = ble_bas_battery_level_update(&m_bas, battery_level);
-    if ((err_code != NRF_SUCCESS) &&
-        (err_code != NRF_ERROR_INVALID_STATE) &&
-        (err_code != NRF_ERROR_RESOURCES) &&
-        (err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)
-       )
-    {
-        APP_ERROR_HANDLER(err_code);
-    }
-}
+///**@brief Function for performing a battery measurement, and update the Battery Level characteristic in the Battery Service.
+// */
+//static void battery_level_update(void)
+//{
+//    ret_code_t err_code;
+//    uint8_t  battery_level;
+//
+//    battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
+//
+//    err_code = ble_bas_battery_level_update(&m_bas, battery_level);
+//    if ((err_code != NRF_SUCCESS) &&
+//        (err_code != NRF_ERROR_INVALID_STATE) &&
+//        (err_code != NRF_ERROR_RESOURCES) &&
+//        (err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)
+//       )
+//    {
+//        APP_ERROR_HANDLER(err_code);
+//    }
+//}
 
 
 /**@brief Function for handling the Battery measurement timer timeout.
@@ -474,11 +474,11 @@ static void battery_level_update(void)
  * @param[in]   p_context   Pointer used for passing some arbitrary information (context) from the
  *                          app_start_timer() call to the timeout handler.
  */
-static void battery_level_meas_timeout_handler(void * p_context)
-{
-    UNUSED_PARAMETER(p_context);
-    battery_level_update();
-}
+//static void battery_level_meas_timeout_handler(void * p_context)
+//{
+//    UNUSED_PARAMETER(p_context);
+//    battery_level_update();
+//}
 
 
 /**@brief Function for the Timer initialization.
@@ -493,16 +493,16 @@ static void timers_init(void)
     APP_ERROR_CHECK(err_code);
 
     // Create battery timer.
-    err_code = app_timer_create(&m_battery_timer_id,
-                                APP_TIMER_MODE_REPEATED,
-                                battery_level_meas_timeout_handler);
-    APP_ERROR_CHECK(err_code);
+//    err_code = app_timer_create(&m_battery_timer_id,
+//                                APP_TIMER_MODE_REPEATED,
+//                                battery_level_meas_timeout_handler);
+//    APP_ERROR_CHECK(err_code);
 
     // Create reconnection timer.
     err_code = app_timer_create(&m_reconn_timer_id,
     		APP_TIMER_MODE_SINGLE_SHOT,
 			reconnect_negotiation_handler);
-    		//nrf_gpio_pin_toggle(LED_2);
+
     APP_ERROR_CHECK(err_code);
 
 
@@ -776,22 +776,22 @@ static void hids_init(void)
 static void services_init(void)
 {
     dis_init();
-   // bas_init();
+    //bas_init();
     hids_init();
 }
 
 
-///**@brief Function for initializing the battery sensor simulator.
-// */
-//static void sensor_simulator_init(void)
-//{
-//    m_battery_sim_cfg.min          = MIN_BATTERY_LEVEL;
-//    m_battery_sim_cfg.max          = MAX_BATTERY_LEVEL;
-//    m_battery_sim_cfg.incr         = BATTERY_LEVEL_INCREMENT;
-//    m_battery_sim_cfg.start_at_max = true;
-//
-//    sensorsim_init(&m_battery_sim_state, &m_battery_sim_cfg);
-//}
+/**@brief Function for initializing the battery sensor simulator.
+ */
+static void sensor_simulator_init(void)
+{
+    m_battery_sim_cfg.min          = MIN_BATTERY_LEVEL;
+    m_battery_sim_cfg.max          = MAX_BATTERY_LEVEL;
+    m_battery_sim_cfg.incr         = BATTERY_LEVEL_INCREMENT;
+    m_battery_sim_cfg.start_at_max = true;
+
+    sensorsim_init(&m_battery_sim_state, &m_battery_sim_cfg);
+}
 
 
 /**@brief Function for handling a Connection Parameters error.
@@ -1038,7 +1038,7 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
 
             err_code = app_timer_start(m_reconn_timer_id, RECONNECT_PARAM_NEGO_INTERVAL, NULL);
             //nrf_gpio_pin_toggle(LED_3);
-            APP_ERROR_CHECK(err_code);
+            //APP_ERROR_CHECK(err_code);
 
 
 
@@ -1569,26 +1569,26 @@ static void power_manage(void)
 }
 
 
-//static void power_config_init(void)
-//{
-//	ret_code_t err_code;
-//
-//	//Set nrf low power mode, to ensure low power operation
-//	//err_code = sd_power_mode_set(NRF_POWER_MODE_LOWPWR);
-//	//APP_ERROR_CHECK(err_code);
-//
-//	//Enable power of failure warning
-//	err_code = sd_power_pof_enable(1);
-//	APP_ERROR_CHECK(err_code);
-//
-//	//Set power of failure threshold to 1.7 Volts
-//	err_code = sd_power_pof_threshold_set(NRF_POWER_THRESHOLD_V17);
-//	APP_ERROR_CHECK(err_code);
-//
-//
-//
-//}
-//
+static void power_config_init(void)
+{
+	ret_code_t err_code;
+
+	//Set nrf low power mode, to ensure low power operation
+	err_code = sd_power_mode_set(NRF_POWER_MODE_LOWPWR);
+	APP_ERROR_CHECK(err_code);
+
+	//Enable power of failure warning
+	err_code = sd_power_pof_enable(1);
+	APP_ERROR_CHECK(err_code);
+
+	//Set power of failure threshold to 2.1 Volts
+	err_code = sd_power_pof_threshold_set(NRF_POWER_THRESHOLD_V21);
+	APP_ERROR_CHECK(err_code);
+
+
+
+}
+
 
 /**@brief Function for application main entry.
  */
@@ -1606,11 +1606,11 @@ int main(void)
     gatt_init();
     advertising_init();
     services_init();
-    //sensor_simulator_init();
+    sensor_simulator_init();
     conn_params_init();
     peer_manager_init();
 
-    //power_config_init();
+    power_config_init();
 
     // Start execution.
     NRF_LOG_INFO("HID Mouse example started.\r\n");
